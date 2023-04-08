@@ -8,16 +8,11 @@ int main() {
 //    board[1][2] = x;
 
     //show board
-    for (int i = 0; i < 3; ++i){
-        for (int j = 0; j < 3; j++){
-            std::cout << "This is [" << i << "][" << j << "]: " << board[i][j] << std::endl;
-        }
-    }
+    std::cout << "Starting board" << std::endl;
+    printGameBoard(board);
 
     Player player1 = createPlayer();
     Player player2 = createPlayer();
-
-    //How do we want to save their selection?
 
     int playerSelection[2] = {0,0};
 
@@ -39,6 +34,7 @@ int main() {
             std::cin >> playerSelection[0];
             std::cout << "Pick a number for the y: ";
             std::cin >> playerSelection[1];
+            //bad input
             if (playerSelection[0] > 2 || playerSelection[1] > 2) {
                 break;
             }
@@ -47,21 +43,21 @@ int main() {
             //update board and selection
             board[playerSelection[0]][playerSelection[1]] = 'x';
             player1.selections[playerSelection[0]][playerSelection[1]] = 'x';
-            //show p1's board
-            for (int i = 0; i < 3; ++i){
-                for (int j = 0; j < 3; j++){
-                    std::cout << "Player 1: This is [" << i << "][" << j << "]: " << player1.selections[i][j] << std::endl;
-                }
+
+            //The better way to print the board
+            printGameBoard(board);
+            if (winnerFound(board)){
+                std::cout << "Congrats " << player1.name << ". You WIN!!";
+                break;
             }
-
         }
-
-        if((turnCount % 2) == 0){
+        else{
             std::cout << player2.name << ". It's your turn! Pick an available square!" << std::endl;
             std::cout << "Pick a number for the x: ";
             std::cin >> playerSelection[0];
             std::cout << "Pick a number for the y: ";
             std::cin >> playerSelection[1];
+            //bad input
             if (playerSelection[0] > 2 || playerSelection[1] > 2) {
                 break;
             }
@@ -70,27 +66,17 @@ int main() {
             //update board and selection
             board[playerSelection[0]][playerSelection[1]] = 'o';
             player2.selections[playerSelection[0]][playerSelection[1]] = 'o';
-            //show p2's board
-            for (int i = 0; i < 3; ++i){
-                for (int j = 0; j < 3; j++){
-                    std::cout << "Player 2: This is [" << i << "][" << j << "]: " << player2.selections[i][j] << std::endl;
-                }
-            }
 
-        }
-
-        //the board
-        for (int i = 0; i < 3; ++i){
-            for (int j = 0; j < 3; j++){
-                std::cout << "This is [" << i << "][" << j << "]: " << board[i][j] << std::endl;
+            //The better way to print the board
+            printGameBoard(board);
+            if (winnerFound(board)){
+                std::cout << "Congrats " << player2.name << ". You WIN!!";
+                break;
             }
         }
-        printGameBoard(board);
+
 
     }
-
-
-
 
     deallocateGameBoard(board);
     deallocatePlayer(player1);
