@@ -24,7 +24,6 @@ void deallocateGameBoard(char** arr) {
         delete[] arr[i];
     }
     delete[] arr;
-    arr = nullptr;
 }
 
 struct Player {
@@ -49,14 +48,11 @@ void deallocatePlayer(Player& player){
 }
 
 void printGameBoard(char** gameBoard){
-
-//    std::cout << "" << std::endl;
     std::cout << gameBoard[0][0] << "    " << gameBoard[0][1] << "    " << gameBoard[0][2] << std::endl;
     std::cout << "--|---|----" << std::endl;
     std::cout << gameBoard[1][0] << "    " << gameBoard[1][1] << "    " << gameBoard[1][2] << std::endl;
     std::cout << "--|---|----" << std::endl;
     std::cout << gameBoard[2][0] << "    " << gameBoard[2][1] << "    " << gameBoard[2][2] << std::endl;
-
 }
 
 bool winnerFound(char** selections){
@@ -92,6 +88,16 @@ bool winnerFound(char** selections){
         return true;
     }
 
+    return false;
+}
+
+bool badSelection(const int* playerSelection, char** board){
+    if (playerSelection[0] > 2 || playerSelection[1] > 2) {
+        return true;
+    }
+    if (board[playerSelection[0]][playerSelection[1]] != '\0'){
+        return true;
+    }
     return false;
 }
 

@@ -35,8 +35,12 @@ int main() {
             std::cout << "Pick a number for the y: ";
             std::cin >> playerSelection[1];
             //bad input
-            if (playerSelection[0] > 2 || playerSelection[1] > 2) {
-                break;
+            while (badSelection(playerSelection, board)){
+                std::cout << "Invalid Input!" << std::endl;
+                std::cout << "Pick a number for the x: ";
+                std::cin >> playerSelection[0];
+                std::cout << "Pick a number for the y: ";
+                std::cin >> playerSelection[1];
             }
             std::cout << "You picked: " << playerSelection[0] << ", " << playerSelection[1] << std::endl;
 
@@ -58,8 +62,12 @@ int main() {
             std::cout << "Pick a number for the y: ";
             std::cin >> playerSelection[1];
             //bad input
-            if (playerSelection[0] > 2 || playerSelection[1] > 2) {
-                break;
+            while (badSelection(playerSelection, board)){
+                std::cout << "Invalid Input!" << std::endl;
+                std::cout << "Pick a number for the x: ";
+                std::cin >> playerSelection[0];
+                std::cout << "Pick a number for the y: ";
+                std::cin >> playerSelection[1];
             }
             std::cout << "You picked: " << playerSelection[0] << ", " << playerSelection[1] << std::endl;
 
